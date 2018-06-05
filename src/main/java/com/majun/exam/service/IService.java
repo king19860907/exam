@@ -1,5 +1,7 @@
 package com.majun.exam.service;
 
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 /**
@@ -8,5 +10,7 @@ import java.util.List;
 public interface IService<T> {
 
     List<T> selectAll();
+
+    PageInfo<T> selectPage(int pageNum, int pageSize);
 
 }
