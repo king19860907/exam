@@ -1,6 +1,7 @@
 package com.majun.exam.service.impl;
 
 import com.majun.exam.dao.UserDao;
+import com.majun.exam.dao.UserMapper;
 import com.majun.exam.pojo.User;
 import com.majun.exam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public List<User> queryUsers() {
-        return userDao.queryUsers();
+        return userMapper.selectAll();
     }
 
 }
