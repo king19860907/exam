@@ -1,6 +1,5 @@
 package com.majun.exam.service.impl;
 
-import com.majun.exam.dao.UserDao;
 import com.majun.exam.dao.UserMapper;
 import com.majun.exam.pojo.User;
 import com.majun.exam.service.UserService;
@@ -14,9 +13,6 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-
-    @Autowired
-    private UserDao userDao;
 
     @Autowired
     private UserMapper userMapper;
