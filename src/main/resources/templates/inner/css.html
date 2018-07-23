@@ -1,8 +1,21 @@
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-<link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+<html xmlns:th="http://www.thymeleaf.org">
 
-<!-- Toastr style -->
-<link th:href="@{/css/plugins/dataTables/datatables.min.css}" rel="stylesheet">
+<head th:fragment="commonHeader(title)">
 
-<link th:href="@{/css/animate.css}" rel="stylesheet">
-<link th:href="@{/css/style.css}" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title th:text="${title}"></title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link th:href="@{/css/plugins/dataTables/datatables.min.css}" rel="stylesheet">
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+</html>

@@ -1,7 +1,5 @@
 package com.majun.exam.base.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import java.io.Serializable;
 
 /**

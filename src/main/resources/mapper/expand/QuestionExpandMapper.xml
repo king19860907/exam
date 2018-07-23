@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.majun.exam.dao.expand.QuestionExpandMapper">
+
+    <resultMap id="question" type="com.majun.exam.pojo.Question">
+        <id column="row_id" jdbcType="INTEGER" property="rowId" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <resultMap id="option" type="com.majun.exam.pojo.Option">
+        <result column="row_id" jdbcType="INTEGER" property="rowId" />
+        <result column="question_id" jdbcType="INTEGER" property="questionId" />
+        <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+        <result column="answer" jdbcType="BIT" property="answer" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
+    </resultMap>
+
+    <select id="queryRandomQuestions" resultMap="question">
+      select * from ex_question
+    </select>
+
+    <select id="queryOptionsByQuestionIds" resultType="com.majun.exam.pojo.Option">
+      select * from ex_option where question_id in
+        <foreach collection="questionIds" index="index" item="questionId" open="(" separator="," close=")">
+            #{questionId}
+        </foreach>
+        order by row_id asc
+    </select>
 </mapper>

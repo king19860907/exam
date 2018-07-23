@@ -1,6 +1,8 @@
 package com.majun.exam;
 
 import com.majun.exam.base.util.BaseMapper;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,10 @@ public class ExamApplication {
 
 	@RequestMapping("/")
 	public ModelAndView index(){
-		return new ModelAndView("index");
+		if(!SecurityUtils.getSubject().isAuthenticated()){
+			return new ModelAndView("index");
+		}
+		return new ModelAndView("redirect:/list");
 	}
 
 }

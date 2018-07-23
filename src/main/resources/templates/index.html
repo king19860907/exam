@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>测题系统</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div style="padding-top: 400px">
+        <div>
+
+
+        </div>
+        <h3>测题系统</h3>
+        <form class="m-t" role="form" action="/" method="post">
+            <div class="form-group">
+                <input class="form-control" name="username" placeholder="姓名" required="">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
+        </form>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script th:src="@{/js/jquery-2.1.1.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

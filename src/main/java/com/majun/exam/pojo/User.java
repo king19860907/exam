@@ -1,5 +1,6 @@
 package com.majun.exam.pojo;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "ex_user")
@@ -14,6 +15,9 @@ public class User {
      */
     @Column(name = "user_name")
     private String userName;
+
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * @return row_id
@@ -45,5 +49,19 @@ public class User {
      */
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
+    }
+
+    /**
+     * @return create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

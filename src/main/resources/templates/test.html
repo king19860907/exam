@@ -1,42 +1,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>测题系统</title>
-
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
-
-    <link th:href="@{/css/animate.css}" rel="stylesheet">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-
-</head>
-
-<body class="gray-bg">
-
-<div class="middle-box text-center loginscreen animated fadeInDown">
-    <div style="padding-top: 400px">
-        <div>
+<head th:include="/inner/css::commonHeader('开始答题')"></head>
 
 
-        </div>
-        <h3>测题系统</h3>
-        <form class="m-t" role="form" action="/" method="post">
-            <div class="form-group">
-                <input class="form-control" name="username" placeholder="姓名" required="">
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div th:include="/inner/left::loadLeft"></div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div th:include="/inner/header::loadHeader"></div>
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Data Tables</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a>Tables</a>
+                    </li>
+                    <li class="active">
+                        <strong>Data Tables</strong>
+                    </li>
+                </ol>
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">登录</button>
-        </form>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Bootstrap Panels <small>Custom background colors.</small></h5>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <div th:each="question,iterStat:${questions}">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <span th:text="${iterStat.index+1}"></span>.<span th:text="${question.description}"></span>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="col-sm-10">
+                                                    <div th:each="option,iterStat:${question.options}">
+                                                        <label>
+                                                            <input type="radio" th:value="${option.rowId}" th:name="${option.questionId}">
+                                                            <span th:text="${option.desc}"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary" id="button">提交</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="/inner/footer::loadFooter"></div>
     </div>
 </div>
 
-<!-- Mainly scripts -->
-<script th:src="@{/js/jquery-2.1.1.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
+<div th:include="/inner/js::loadJs"></div>
+<script th:src="@{/js/page/test.js}" ></script>
 
+<script th:inline="javascript">
+
+
+</script>
 </body>
-
 </html>
