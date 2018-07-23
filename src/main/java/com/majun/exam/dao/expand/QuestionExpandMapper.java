@@ -17,4 +17,8 @@ public interface QuestionExpandMapper {
 
     List<Option> queryOptionsByQuestionIds(@Param("questionIds") List<Integer> questionIds);
 
+    List<Question> queryAllQuestions();
+
+    List<Option> queryAllOption();
+
 }
