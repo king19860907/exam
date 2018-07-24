@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.majun.exam.dao.AnswerDetailMapper">
+  <resultMap id="BaseResultMap" type="com.majun.exam.pojo.AnswerDetail">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="answer_id" jdbcType="INTEGER" property="answerId" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="choose_answer_id" jdbcType="INTEGER" property="chooseAnswerId" />
+    <result column="right_answer_id" jdbcType="INTEGER" property="rightAnswerId" />
+  </resultMap>
+</mapper>
