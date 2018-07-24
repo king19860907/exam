@@ -64,7 +64,7 @@ public class ShiroConfig {
     public SessionManager getSessionManager(@Qualifier("sessionIdCookie") SimpleCookie cookie) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         //session失效时间
-        sessionManager.setGlobalSessionTimeout(1800000);
+        sessionManager.setGlobalSessionTimeout(1440000);
         //自定义cookies 启用
         sessionManager.setSessionIdCookie(getSessionIdCookie());
         sessionManager.setSessionIdCookieEnabled(true);

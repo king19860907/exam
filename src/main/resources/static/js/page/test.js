@@ -6,15 +6,48 @@ $(document).ready(function(){
     l.click(function(){
         l.ladda( 'start' );
 
+        $(".panel-danger").each(function(){
+            $(this).removeClass("panel-danger").addClass("panel-default");
+        });
+
         setTimeout(function(){
             var answers = [];
-            $('input:radio:checked').each(function(){
+            var unAnswers = [];
+            /*$('input:radio:checked').each(function(){
                 answers.push({
                     questionId:this.name,
                     optionId:this.value,
                 });
+            });*/
+
+            $("[name^='question-']").each(function(){
+                var name = $(this).attr("name");
+                var questionId = name.substring(name.indexOf("-")+1,name.length);
+                var checkedRadio = $("input[name='"+questionId+"']:checked");
+                if(typeof(checkedRadio.val()) != 'undefined'){
+                    answers.push({
+                        questionId:checkedRadio.attr("name"),
+                        optionId:checkedRadio.val(),
+                    });
+                }else{
+                    unAnswers.push({
+                        questionId:questionId,
+                    })
+                    checkedRadio.focus();
+                }
             });
+
+            //有没做的题目
+            if(unAnswers.length>0){
+                unAnswers.forEach(function(item){
+                    $("#question-"+item.questionId).removeClass("panel-default").addClass("panel-danger");
+                });
+                l.ladda( 'stop' );
+                return;
+            }
+
             console.log(answers);
+
             $.ajax({
                 type: "post",
                 url: "/api/answers",
@@ -43,37 +76,5 @@ $(document).ready(function(){
         },1000)
 
     });
-
-
-   /* $("#button").click(function(){
-        var answers = [];
-        $('input:radio:checked').each(function(){
-            answers.push({
-                questionId:this.name,
-                optionId:this.value,
-            });
-        });
-        console.log(answers);
-
-
-
-        /!*$.ajax({
-            type: "post",
-            url: "/api/answers",
-            contentType: "application/json",
-            data: JSON.stringify({
-                answers: answers
-            }),
-            dataType: "JSON",
-            async: false,
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-            }
-
-        });*!/
-
-    });*/
 
 });
