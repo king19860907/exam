@@ -1,7 +1,10 @@
 package com.majun.exam.service;
 
+import com.majun.exam.base.dto.InfoDto;
 import com.majun.exam.dto.QuestionDto;
+import com.majun.exam.dto.SaveAnswerDto;
 import com.majun.exam.pojo.Question;
+
 import java.util.List;
 
 /**
@@ -10,5 +13,7 @@ import java.util.List;
 public interface QuestionService extends IService<Question>   {
 
     List<QuestionDto> queryQuestions();
+
+    InfoDto saveAnswers(SaveAnswerDto saveAnswerDto);
 
 }

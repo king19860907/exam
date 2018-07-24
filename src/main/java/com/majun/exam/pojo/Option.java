@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 @Table(name = "ex_option")
 public class Option {
+    @Id
     @Column(name = "row_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rowId;

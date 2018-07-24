@@ -65,5 +65,11 @@
         <table tableName="ex_option" domainObjectName="Option" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="row_id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <table tableName="ex_answer" domainObjectName="Answer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="row_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="ex_answer_detail" domainObjectName="AnswerDetail" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

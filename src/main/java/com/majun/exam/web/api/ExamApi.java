@@ -2,6 +2,7 @@ package com.majun.exam.web.api;
 
 import com.majun.exam.base.dto.InfoDto;
 import com.majun.exam.dto.SaveAnswerDto;
+import com.majun.exam.service.QuestionService;
 import com.majun.exam.service.UserService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +19,11 @@ import javax.annotation.Resource;
 public class ExamApi {
 
     @Resource
-    private UserService userService;
+    private QuestionService questionService;
 
     @RequestMapping(value = "/answers",method = RequestMethod.POST)
     public InfoDto saveAnswer(@RequestBody SaveAnswerDto data){
-        return InfoDto.defaultSuccess(null);
+        return questionService.saveAnswers(data);
     }
 
 }

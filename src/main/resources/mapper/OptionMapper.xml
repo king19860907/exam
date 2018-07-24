@@ -5,7 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="row_id" jdbcType="INTEGER" property="rowId" />
+    <id column="row_id" jdbcType="INTEGER" property="rowId" />
     <result column="question_id" jdbcType="INTEGER" property="questionId" />
     <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
     <result column="answer" jdbcType="BIT" property="answer" />
