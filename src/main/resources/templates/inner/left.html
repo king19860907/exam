@@ -6,7 +6,10 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                            <span class="clear"> <span class="block m-t-xs">
+                                <strong class="font-bold">
+                                    <th:block th:text="${session.SESSION_USER.userName}"></th:block>
+                                </strong>
                              </span></span>
                         </a>
                     </div>

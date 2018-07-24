@@ -4,6 +4,7 @@ import com.majun.exam.pojo.Option;
 import com.majun.exam.pojo.Question;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,18 @@ public class CacheDataUtil {
 
     public static List<Option> getOptionsByQuestionId(Integer questionId){
         return OPTION_MAP.get(questionId);
+    }
+
+    public static Question getQuestionById(Integer id){
+        return QUESTION_MAP.get(id);
+    }
+
+    public static List<Question> getQuestionsByIds(List<Integer> ids){
+        List<Question> list = new ArrayList<>();
+        for(Integer id : ids){
+            list.add(getQuestionById(id));
+        }
+        return list;
     }
 
     public static Option getRightOption(Integer questionId){

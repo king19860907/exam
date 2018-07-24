@@ -18,6 +18,22 @@
         <result column="desc" jdbcType="VARCHAR" property="desc" />
     </resultMap>
 
+    <resultMap id="answer" type="com.majun.exam.dto.AnswerDto">
+        <id column="row_id" jdbcType="INTEGER" property="rowId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="score" jdbcType="INTEGER" property="score" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <resultMap id="answerDetail" type="com.majun.exam.pojo.AnswerDetail">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="answer_id" jdbcType="INTEGER" property="answerId" />
+        <result column="question_id" jdbcType="INTEGER" property="questionId" />
+        <result column="choose_answer_id" jdbcType="INTEGER" property="chooseAnswerId" />
+        <result column="right_answer_id" jdbcType="INTEGER" property="rightAnswerId" />
+    </resultMap>
+
     <select id="queryRandomQuestions" resultMap="question">
       select * from ex_question where delete_flag = 0
 
@@ -36,5 +52,16 @@
     </select>
     <select id="queryAllOption" resultMap="option">
         select * from ex_option where delete_flag = 0
+    </select>
+
+    <select id="queryAnswers" resultMap="answer">
+        select t1.row_id,t1.user_id,t2.user_name,t1.score,t1.create_time from ex_answer t1,ex_user t2
+        where t1.user_id = t2.row_id
+        and t1.user_id = #{userId}
+        order by t1.create_time desc
+    </select>
+    <select id="queryAnswerDetails" resultMap="answerDetail">
+        select * from ex_answer_detail where answer_id = #{answerId}
+        order by id asc
     </select>
 </mapper>

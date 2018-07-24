@@ -1,5 +1,7 @@
 package com.majun.exam.dao.expand;
 
+import com.majun.exam.dto.AnswerDto;
+import com.majun.exam.pojo.AnswerDetail;
 import com.majun.exam.pojo.Option;
 import com.majun.exam.pojo.Question;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,5 +22,9 @@ public interface QuestionExpandMapper {
     List<Question> queryAllQuestions();
 
     List<Option> queryAllOption();
+
+    List<AnswerDto> queryAnswers(@Param("userId") Integer userId);
+
+    List<AnswerDetail> queryAnswerDetails(Integer answerId);
 
 }

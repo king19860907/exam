@@ -6,6 +6,8 @@ import com.majun.exam.base.util.RequestUtils;
 import com.majun.exam.dao.AnswerDetailMapper;
 import com.majun.exam.dao.AnswerMapper;
 import com.majun.exam.dao.expand.QuestionExpandMapper;
+import com.majun.exam.dto.AnswerDetailDto;
+import com.majun.exam.dto.AnswerDto;
 import com.majun.exam.dto.QuestionDto;
 import com.majun.exam.dto.SaveAnswerDto;
 import com.majun.exam.pojo.Answer;
@@ -17,10 +19,9 @@ import com.majun.exam.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -91,6 +92,42 @@ public class QuestionServiceImpl extends BaseService<Question> implements Questi
         answer.setQuestionIdStr(sb.toString());
         answerMapper.updateByPrimaryKey(answer);
 
-        return null;
+        return InfoDto.defaultSuccess(answer.getRowId());
+    }
+
+    @Override
+    public List<AnswerDto> answers() {
+        Integer userId = RequestUtils.getUser().getRowId();
+        return questionExpandMapper.queryAnswers(userId);
+    }
+
+    @Override
+    public AnswerDetailDto detail(Integer id) {
+        Answer answer = answerMapper.selectByPrimaryKey(id);
+
+        List<AnswerDetail> details = questionExpandMapper.queryAnswerDetails(id);
+        Map<Integer,AnswerDetail> questionIdDetailMap = new HashMap<>();
+        for(AnswerDetail detail : details){
+            questionIdDetailMap.put(detail.getQuestionId(),detail);
+        }
+
+        String questionIdStr = answer.getQuestionIdStr();
+        List<QuestionDto> questions = Arrays.asList(questionIdStr.split(",")).stream().filter(idStr->{
+            return !StringUtils.isEmpty(idStr);
+        }).map(idStr->{
+            Integer questionId = Integer.parseInt(idStr);
+            Question question = CacheDataUtil.getQuestionById(questionId);
+            List<Option> options = CacheDataUtil.getOptionsByQuestionId(question.getRowId());
+            QuestionDto questionDto = new QuestionDto(question,options);
+            if(questionIdDetailMap.get(questionId)!=null){
+                questionDto.setChooseOptionId(questionIdDetailMap.get(questionId).getChooseAnswerId());
+            }
+            return questionDto;
+        }).collect(Collectors.toList());
+
+        AnswerDetailDto detailDto = new AnswerDetailDto();
+        detailDto.setAnswer(answer);
+        detailDto.setQuestions(questions);
+        return detailDto;
     }
 }

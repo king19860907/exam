@@ -1,5 +1,6 @@
 package com.majun.exam.dto;
 
+import com.majun.exam.base.util.CacheDataUtil;
 import com.majun.exam.pojo.Option;
 import com.majun.exam.pojo.Question;
 
@@ -13,6 +14,9 @@ public class QuestionDto {
     private Question question;
 
     private List<Option> options;
+
+    private Integer chooseOptionId;
+
 
     public QuestionDto(Question question,List<Option> options) {
         this.options = options;
@@ -38,4 +42,24 @@ public class QuestionDto {
     public void setQuestion(Question question) {
         this.question = question;
     }
+
+    public Integer getChooseOptionId() {
+        return chooseOptionId;
+    }
+
+    public void setChooseOptionId(Integer chooseOptionId) {
+        this.chooseOptionId = chooseOptionId;
+    }
+
+    public boolean isRight(){
+        if(chooseOptionId == null){
+            return true;
+        }
+        Option rightOption = CacheDataUtil.getRightOption(question.getRowId());
+        if(chooseOptionId == rightOption.getRowId()){
+            return true;
+        }
+        return false;
+    }
+
 }

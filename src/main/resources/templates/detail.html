@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 
-<head th:include="/inner/css::commonHeader('开始答题')"></head>
+<head th:include="/inner/css::commonHeader('答题详情')"></head>
 
 
 <body>
@@ -14,13 +14,13 @@
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>开始答题</h2>
+                <h2>答题详情</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="/list">首页</a>
                     </li>
                     <li class="active">
-                        <strong>开始答题</strong>
+                        <strong>答题详情</strong>
                     </li>
                 </ol>
             </div>
@@ -32,36 +32,47 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
-                        <!--<div class="ibox-title">
-                            <h5>Bootstrap Panels <small>Custom background colors.</small></h5>
-                        </div>-->
+                        <div class="ibox-title">
+                            <h5>得分 <span style="color:#ed5565"><th:block th:text="${detail.answer.score}"></th:block></span>
+                                <small>答题时间 <th:block th:text="${#dates.format(detail.answer.createTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block></small>
+                            </h5>
+                        </div>
                         <div class="ibox-content">
 
                             <div class="row">
-                                <div th:each="question,iterStat:${questions}">
+                                <div th:each="question,iterStat:${detail.questions}">
                                     <div class="col-lg-12">
-                                        <div class="panel panel-default">
+                                        <div th:class="${question.right?'panel panel-default':'panel panel-danger'}">
                                             <div class="panel-heading">
                                                 <span th:text="${iterStat.index+1}"></span>.<span th:text="${question.description}"></span>
                                             </div>
                                             <div class="panel-body">
                                                 <div class="col-sm-10">
                                                     <div th:each="option,iterStat:${question.options}">
-                                                        <label>
-                                                            <input type="radio" th:value="${option.rowId}" th:name="${option.questionId}">
-                                                            <span th:text="${option.desc}"></span>
+                                                        <label th:if="${option.answer}">
+                                                            <span style="color:#1ab394" th:text="${option.desc}">
+                                                            </span>
+                                                        </label>
+                                                        <label th:if="!${option.answer}">
+                                                            <th:block th:if="${option.rowId} == ${question.chooseOptionId}">
+                                                                <span style="color:#ed5565" th:text="${option.desc}">
+                                                                </span>
+                                                            </th:block>
+                                                            <th:block th:if="${option.rowId} != ${question.chooseOptionId}">
+                                                                <span th:text="${option.desc}">
+                                                                </span>
+                                                            </th:block>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <button class="ladda-button ladda-button-demo btn btn-primary" id="button"  data-style="zoom-in">提交</button>
+                                    <button class="btn btn-primary" id="button" onclick="back();">返回</button>
                                 </div>
                             </div>
                         </div>
@@ -74,9 +85,11 @@
 </div>
 
 <div th:include="/inner/js::loadJs"></div>
-<script th:src="@{/js/page/test.js}" ></script>
 
 <script th:inline="javascript">
+function back(){
+    location.href="/";
+}
 
 </script>
 </body>
