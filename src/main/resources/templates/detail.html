@@ -50,16 +50,16 @@
                                                 <div class="col-sm-10">
                                                     <div th:each="option,iterStat:${question.options}">
                                                         <label th:if="${option.answer}">
-                                                            <span style="color:#1ab394" th:text="${option.desc}">
+                                                            <span style="color:#1ab394" th:text="${option.description}">
                                                             </span>
                                                         </label>
                                                         <label th:if="!${option.answer}">
                                                             <th:block th:if="${option.rowId} == ${question.chooseOptionId}">
-                                                                <span style="color:#ed5565" th:text="${option.desc}">
+                                                                <span style="color:#ed5565" th:text="${option.description}">
                                                                 </span>
                                                             </th:block>
                                                             <th:block th:if="${option.rowId} != ${question.chooseOptionId}">
-                                                                <span th:text="${option.desc}">
+                                                                <span th:text="${option.description}">
                                                                 </span>
                                                             </th:block>
                                                         </label>

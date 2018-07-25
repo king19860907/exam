@@ -10,6 +10,6 @@
     <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
     <result column="answer" jdbcType="BIT" property="answer" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
 </mapper>

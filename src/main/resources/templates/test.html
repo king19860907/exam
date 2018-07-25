@@ -49,7 +49,7 @@
                                                     <div th:each="option,iterStat:${question.options}">
                                                         <label>
                                                             <input type="radio" th:value="${option.rowId}" th:name="${option.questionId}">
-                                                            <span th:text="${option.desc}"></span>
+                                                            <span th:text="${option.description}"></span>
                                                         </label>
                                                     </div>
                                                 </div>

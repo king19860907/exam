@@ -4,10 +4,7 @@ import com.majun.exam.pojo.Option;
 import com.majun.exam.pojo.Question;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by majun on 2018/7/24.
@@ -15,6 +12,8 @@ import java.util.List;
 public class CacheDataUtil {
 
     public final static Map<Integer,Question> QUESTION_MAP = new HashMap<>();
+
+    public final static List<Question> QUESTION_LIST = new ArrayList<>();
 
     public final static Map<Integer,List<Option>> OPTION_MAP = new HashMap<>();
 
@@ -45,6 +44,29 @@ public class CacheDataUtil {
             }
         }
         return null;
+    }
+
+    public static List<Question> getRandomQuestions(int size){
+        List<Question> list = QUESTION_LIST;
+        List<Question> randomList = new ArrayList<>(size);
+        Set<Integer> numbers = getRandomNumber(size,list.size());
+        numbers.forEach(number->randomList.add(list.get(number)));
+        return randomList;
+    }
+
+    private static Set<Integer> getRandomNumber(int size,int range){
+        Set<Integer> numbers = new LinkedHashSet<>();
+        Random random = new Random();
+        int i = 0;
+        while (numbers.size()<size && i<1000000){
+            numbers.add(random.nextInt(range));
+            i++;
+        }
+        return numbers;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getRandomNumber(50,100));
     }
 
 }

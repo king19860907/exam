@@ -17,6 +17,8 @@ import com.majun.exam.pojo.Question;
 import com.majun.exam.service.BaseService;
 import com.majun.exam.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -39,11 +41,14 @@ public class QuestionServiceImpl extends BaseService<Question> implements Questi
     @Autowired
     private AnswerDetailMapper answerDetailMapper;
 
+    @Value("${question.num}")
+    private int randomQuestionNum;
+
     @Override
     public List<QuestionDto> queryQuestions() {
 
         //查询题目
-        List<Question> questions = questionExpandMapper.queryRandomQuestions();
+        List<Question> questions = CacheDataUtil.getRandomQuestions(randomQuestionNum);
 
         List<QuestionDto> questionDtos = questions.stream().map(question -> {
             QuestionDto dto = new QuestionDto(question, CacheDataUtil.getOptionsByQuestionId(question.getRowId()));
@@ -71,7 +76,7 @@ public class QuestionServiceImpl extends BaseService<Question> implements Questi
             SaveAnswerDto.AnswerDto answerDto = answerDtos.get(i);
             Option rightOption = CacheDataUtil.getRightOption(answerDto.getQuestionId());
             //回答错误
-            if(rightOption.getRowId() != answerDto.getOptionId()){
+            if(rightOption.getRowId().intValue() != answerDto.getOptionId().intValue()){
                 AnswerDetail detail = new AnswerDetail();
                 detail.setAnswerId(answer.getRowId());
                 detail.setChooseAnswerId(answerDto.getOptionId());

@@ -56,7 +56,7 @@ public class QuestionDto {
             return true;
         }
         Option rightOption = CacheDataUtil.getRightOption(question.getRowId());
-        if(chooseOptionId == rightOption.getRowId()){
+        if(chooseOptionId.intValue() == rightOption.getRowId().intValue()){
             return true;
         }
         return false;

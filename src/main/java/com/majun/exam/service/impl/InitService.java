@@ -29,8 +29,12 @@ public class InitService implements InitializingBean {
 
     private void initQuestions(){
         Map<Integer,Question> map = CacheDataUtil.QUESTION_MAP;
+        List<Question> list = CacheDataUtil.QUESTION_LIST;
         List<Question> questions = questionExpandMapper.queryAllQuestions();
-        questions.forEach(question -> map.put(question.getRowId(),question));
+        questions.forEach(question -> {
+            map.put(question.getRowId(),question);
+            list.add(question);
+        });
     }
 
     private void initOptions(){

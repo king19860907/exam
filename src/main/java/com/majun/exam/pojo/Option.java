@@ -30,7 +30,7 @@ public class Option {
     @Column(name = "create_time")
     private Date createTime;
 
-    private String desc;
+    private String description;
 
     /**
      * @return row_id
@@ -115,16 +115,16 @@ public class Option {
     }
 
     /**
-     * @return desc
+     * @return description
      */
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @param desc
+     * @param description
      */
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

@@ -1,6 +1,5 @@
 package com.majun.typeParameterResover;
 
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import org.apache.ibatis.reflection.TypeParameterResolver;
 
 import java.lang.reflect.Field;
