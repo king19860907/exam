@@ -20,6 +20,7 @@ $(document).ready(function(){
                 });
             });*/
 
+            var uncheckRadio = null;
             $("[name^='question-']").each(function(){
                 var name = $(this).attr("name");
                 var questionId = name.substring(name.indexOf("-")+1,name.length);
@@ -33,7 +34,10 @@ $(document).ready(function(){
                     unAnswers.push({
                         questionId:questionId,
                     })
-                    checkedRadio.focus();
+                    if(uncheckRadio == null){
+                        uncheckRadio = checkedRadio;
+                        $("html,body").animate({scrollTop:$(this).offset().top},"fast")
+                    }
                 }
             });
 
