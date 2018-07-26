@@ -117,6 +117,7 @@ public class ShiroConfig {
         map.put("/**/*.png", "anon");
         map.put("/fonts/*", "anon");
         map.put("/font-awesome/**/*","anon");
+        map.put("/api/init","anon");
         map.put("/logout","logout");
         map.put("/**", "authc");
 

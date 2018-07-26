@@ -1,5 +1,6 @@
 package com.majun.exam.service.impl;
 
+import com.majun.exam.base.dto.InfoDto;
 import com.majun.exam.base.util.CacheDataUtil;
 import com.majun.exam.dao.expand.QuestionExpandMapper;
 import com.majun.exam.pojo.Option;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Created by majun on 2018/7/24.
@@ -25,6 +27,15 @@ public class InitService implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         initQuestions();
         initOptions();
+    }
+
+    public InfoDto init() throws Exception {
+        afterPropertiesSet();
+        Map<String,Integer> map = new HashMap<>();
+        map.put("option_map",CacheDataUtil.OPTION_MAP.size());
+        map.put("question_map",CacheDataUtil.QUESTION_MAP.size());
+        map.put("question_list",CacheDataUtil.QUESTION_LIST.size());
+        return InfoDto.defaultSuccess(map);
     }
 
     private void initQuestions(){
