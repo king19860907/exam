@@ -165,6 +165,12 @@ public class ExcelData {
                 return 3;
             }
 
+        }else if("A".equals(rightAnswer.toUpperCase())){
+            return 1;
+        }else if("B".equals(rightAnswer.toUpperCase())){
+            return 2;
+        }else if("C".equals(rightAnswer.toUpperCase())){
+            return 1;
         }else{
            if(optionA.trim().equals(rightAnswer.trim())){
                return 1;
