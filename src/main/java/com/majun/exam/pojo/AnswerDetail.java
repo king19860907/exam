@@ -1,11 +1,13 @@
 package com.majun.exam.pojo;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
 import javax.persistence.*;
 
 @Table(name = "ex_answer_detail")
 public class AnswerDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys = true)
     private Long id;
 
     /**

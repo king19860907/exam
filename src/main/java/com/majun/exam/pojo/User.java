@@ -1,13 +1,17 @@
 package com.majun.exam.pojo;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "ex_user")
 public class User {
     @Id
     @Column(name = "row_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys = true)
     private Integer rowId;
 
     /**

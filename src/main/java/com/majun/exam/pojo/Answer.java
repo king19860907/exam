@@ -1,5 +1,7 @@
 package com.majun.exam.pojo;
 
+import tk.mybatis.mapper.annotation.KeySql;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -7,7 +9,7 @@ import javax.persistence.*;
 public class Answer {
     @Id
     @Column(name = "row_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys = true)
     private Integer rowId;
 
     /**
